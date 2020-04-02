@@ -1,106 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Hello Sharks!</title>
-		<style>
-			html {
-			  background: ##091f2a;
-			  background-image: linear-gradient(351deg, #69b3d0 0%, #091f2a 100%);
-			  height: 100%;
-			}
-			body {
-			  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-			  margin: 0;
-			}
+  <head>
+    <meta charset="utf-8" />
+    <title>Hello Sharks!</title>
+    <style>
+      html {
+        background: ##091f2a;
+        background-image: linear-gradient(351deg, #69b3d0 0%, #091f2a 100%);
+        height: 100%;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+      }
 
-			h1 {
-			  font-size: 3.4rem;
-			}
+      h1 {
+        font-size: 3.4rem;
+      }
 
-			.form {
-			  background-color: #ddd;
-			  padding: 15px;
-			  max-width: 450px;
-			  margin: 1.5em auto;
-			  text-align: center;
-			  color: #333;
-			}
+      .form {
+        background-color: #ddd;
+        padding: 15px;
+        max-width: 490px;
+        margin: 1.5em auto;
+        text-align: center;
+        color: #333;
+      }
 
-			.form input {
-			  background-color: transparent;
-			  border: none;
-			  border-bottom: 3px dashed #999;
-			  display: inline;
-			  color: #111;
-			  text-align: center;
-			}
+      .form input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 3px dashed #999;
+        display: inline;
+        color: #111;
+        text-align: center;
+      }
 
-			#amount {
-			  width: 180px;
-			}
-			#percent {
-			  width: 90px;
-			}
-			#value {
-			  color: #111;
-			  font-weight: bold;
-			}
+      #amount {
+        width: 180px;
+      }
+      #percent {
+        width: 90px;
+      }
+      #value {
+        color: #111;
+        font-weight: bold;
+      }
+      .quot {
+        font-size: 2.5rem;
+        color: #000;
+        font-family: Georgia;
+        padding: 0.3rem;
+      }
 
-			.form p,
-			.form input {
-			  font-size: 2rem;
-			  line-height: 3.2rem;
-			}
+      .form p,
+      .form input {
+        font-size: 2rem;
+        line-height: 3.2rem;
+      }
 
-			#amount,
-			#percent,
-			#value {
-			  font-variant-numeric: tabular-nums;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="form">
-			<h1>Hello Sharks!</h1>
-			<p>I'm seeking $<input id="amount" value="50,000" /> for <input id="percent" value="20" type="number" /> percent of my company…</p>
-			<hr />
-			<p>Valuation: <span id="value">$ 250,000</span></p>
-		</div>
-		<script>
-			const amountInput = document.querySelector("#amount");
-			const percentInput = document.querySelector("#percent");
-			const valueEl = document.querySelector("#value");
+      #amount,
+      #percent,
+      #value {
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <h1>Hello Sharks!</h1>
+      <p>
+        <span class="quot">&ldquo;</span>I'm seeking $<input
+          id="amount"
+          value="50,000"
+        />
+        for <input id="percent" value="20" type="number" /> percent of my
+        company…<span class="quot">&rdquo;</span>
+      </p>
+      <hr />
+      <p class="valuation">Valuation: <span id="value">$ 250,000</span></p>
+    </div>
+    <script>
+      const amountInput = document.querySelector("#amount");
+      const percentInput = document.querySelector("#percent");
+      const valueEl = document.querySelector("#value");
 
-			function calculateValue() {
-			  valueEl.innerText = `$ ${humanizeNumber(
-			    Math.round(
-			      (asNumber(amountInput.value) * 100) / asNumber(percentInput.value)
-			    )
-			  )}`;
-			}
+      function calculateValue() {
+        valueEl.innerText = `$ ${humanizeNumber(
+          Math.round(
+            (asNumber(amountInput.value) * 100) / asNumber(percentInput.value)
+          )
+        )}`;
+      }
 
-			function humanizeNumber(num) {
-			  num = num.toString().split(".");
-			  num[0] = num[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-			  return num.join(".");
-			}
+      function humanizeNumber(num) {
+        num = num.toString().split(".");
+        num[0] = num[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        return num.join(".");
+      }
 
-			function handleInput(ev) {
-			  if (ev.currentTarget.value !== "") {
-			    calculateValue();
-			    ev.currentTarget.value = humanizeNumber(
-			      asNumber(ev.currentTarget.value)
-			    );
-			  }
-			}
+      function handleInput(ev) {
+        if (ev.currentTarget.value !== "") {
+          calculateValue();
+          ev.currentTarget.value = humanizeNumber(
+            asNumber(ev.currentTarget.value)
+          );
+        }
+      }
 
-			function asNumber(inputVal) {
-			  return parseInt(inputVal.replace(/,/g, "").replace(/\./g, ""), 10);
-			}
+      function asNumber(inputVal) {
+        return parseInt(inputVal.replace(/,/g, "").replace(/\./g, ""), 10);
+      }
 
-			amountInput.addEventListener("input", handleInput, false);
-			percentInput.addEventListener("input", handleInput, false);
-		</script>
-	</body>
+      amountInput.addEventListener("input", handleInput, false);
+      percentInput.addEventListener("input", handleInput, false);
+    </script>
+  </body>
 </html>
