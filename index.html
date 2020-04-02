@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Hello Sharks!</title>
+		<style>
+			   html {
+
+			   }
+			body {
+			 font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+			    margin: 0;
+			    height: 100%;
+			    background-image: linear-gradient(351deg, #69b3d0 0%, #091f2a 100%);
+			}
+			   .form{
+			     background-color: #ddd;
+			     padding: 15px;
+			     max-width: 450px;
+			        margin: 1em auto;
+			        text-align: center;
+			   }
+
+			      .form, .form input {
+			        font-size: 1.4rem;
+			      }
+
+			   #amount, #percent, #value {
+					  font-variant-numeric: tabular-nums;
+					}
+		</style>
+	</head>
+	<body>
+		<div class="form">
+			<p>Hello Sharks!</p>
+			<p>I'm seeking</p>
+
+			<input id="amount" value="50,000" />
+
+			<p>dollars for</p>
+
+			<input id="percent" value="20" />
+
+			<p>percent of my company…</p>
+			<hr />
+			<p>Value: $<span id="value">250,000</span></p>
+		</div>
+		<script>
+			const amountInput = document.querySelector('#amount');
+			const percentInput = document.querySelector('#percent');
+			const valueEl = document.querySelector('#value');
+
+			function calculateValue(){
+			  valueEl.innerText = humanizeNumber(
+			       (asNumber(amountInput.value) * 100) / asNumber(percentInput.value)
+			     );
+			}
+
+			  function humanizeNumber(num){
+			    num = num.toString().split('.');
+			    num[0] = num[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+			    return num.join('.');
+			  }
+
+			function handleInput(ev) {
+			  if(ev.currentTarget.value !== '') {
+			    calculateValue();
+			    ev.currentTarget.value = humanizeNumber(asNumber(ev.currentTarget.value));
+			  }
+			}
+
+			function asNumber(inputVal) {
+			  return parseInt(inputVal.replace(/,/g,'').replace(/\./g, ''), 10);
+			}
+
+			amountInput.addEventListener('input', handleInput, false);
+			percentInput.addEventListener('input', handleInput, false);
+		</script>
+	</body>
+</html>
