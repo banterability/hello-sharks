@@ -5,68 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content="A calculator for business valuations" />
     <title>Hello Sharks!</title>
-    <style>
-      html {
-        background: ##091f2a;
-        background-image: linear-gradient(351deg, #69b3d0 0%, #091f2a 100%);
-        height: 100%;
-      }
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        margin: 0;
-      }
-
-      h1 {
-        font-size: 3.4rem;
-      }
-
-      .form {
-        background-color: #ddd;
-        padding: 15px;
-        max-width: 490px;
-        margin: 1.5em auto;
-        text-align: center;
-        color: #333;
-      }
-
-      .form input {
-        background-color: transparent;
-        border: none;
-        border-bottom: 3px dashed #999;
-        display: inline;
-        color: #111;
-        text-align: center;
-      }
-
-      #amount {
-        width: 180px;
-      }
-      #percent {
-        width: 90px;
-      }
-      #value {
-        color: #111;
-        font-weight: bold;
-      }
-      .quot {
-        font-size: 2.5rem;
-        color: #000;
-        font-family: Georgia;
-        padding: 0.3rem;
-      }
-
-      .form p,
-      .form input {
-        font-size: 2rem;
-        line-height: 3.2rem;
-      }
-
-      #amount,
-      #percent,
-      #value {
-        font-variant-numeric: tabular-nums;
-      }
-    </style>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <div class="form">
@@ -82,41 +21,7 @@
       <hr />
       <p class="valuation">Valuation: <span id="value">$ 250,000</span></p>
     </div>
-    <script>
-      const amountInput = document.querySelector("#amount");
-      const percentInput = document.querySelector("#percent");
-      const valueEl = document.querySelector("#value");
-
-      function calculateValue() {
-        valueEl.innerText = `$ ${humanizeNumber(
-          Math.round(
-            (asNumber(amountInput.value) * 100) / asNumber(percentInput.value)
-          )
-        )}`;
-      }
-
-      function humanizeNumber(num) {
-        num = num.toString().split(".");
-        num[0] = num[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-        return num.join(".");
-      }
-
-      function handleInput(ev) {
-        if (ev.currentTarget.value !== "") {
-          calculateValue();
-          ev.currentTarget.value = humanizeNumber(
-            asNumber(ev.currentTarget.value)
-          );
-        }
-      }
-
-      function asNumber(inputVal) {
-        return parseInt(inputVal.replace(/,/g, "").replace(/\./g, ""), 10);
-      }
-
-      amountInput.addEventListener("input", handleInput, false);
-      percentInput.addEventListener("input", handleInput, false);
-    </script>
+    <script src="/script.js" type="text/javascript"></script>
 
     <script type="text/javascript">
       if ("serviceWorker" in navigator) {
