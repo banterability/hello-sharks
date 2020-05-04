@@ -1,68 +1,25 @@
-var version = 'v1::';
+const version = "v1";
+const cacheName = `${version}-hellosharks`;
 
-self.addEventListener("install", function(event) {
-  event.waitUntil(
-      .open(`${version}hello-sharks`)
-      .then(function(cache) {
-
-        return cache.addAll(['index.html']);
-      })
+self.addEventListener("install", e => {
+  e.waitUntil(
+    caches.open(cacheName).then(cache => {
+      return cache.addAll([`/`, `/index.html`]).then(() => self.skipWaiting());
+    })
   );
 });
 
-self.addEventListener("fetch", function(event) {
-  if (event.request.method !== 'GET') {
-    return;
-  }
+self.addEventListener("activate", event => {
+  event.waitUntil(self.clients.claim());
+});
 
+self.addEventListener("fetch", event => {
   event.respondWith(
     caches
-      .match(event.request)
-      .then(function(cached) {
-        var networked = fetch(event.request)
-          .then(fetchedFromNetwork, unableToResolve)
-          .catch(unableToResolve);
-
-        return cached || networked;
-
-        function fetchedFromNetwork(response) {
-          var cacheCopy = response.clone();
-          caches
-            // We open a cache to store the response for this request.
-            .open(version + 'pages')
-            .then(function add(cache) {
-              return cache.put(event.request, cacheCopy);
-            })
-          return response;
-        }
-
-        function unableToResolve () {
-          return new Response('<h1>Service Unavailable</h1>', {
-            status: 503,
-            statusText: 'Service Unavailable',
-            headers: new Headers({
-              'Content-Type': 'text/html'
-            })
-          });
-        }
-      })
-  );
-});
-
-self.addEventListener("activate", function(event) {
-  event.waitUntil(
-    caches
-      .keys()
-      .then(function (keys) {
-        return Promise.all(
-          keys
-            .filter(function (key) {
-              return !key.startsWith(version);
-            })
-            .map(function (key) {
-              return caches.delete(key);
-            })
-        );
+      .open(cacheName)
+      .then(cache => cache.match(event.request, { ignoreSearch: true }))
+      .then(response => {
+        return response || fetch(event.request);
       })
   );
 });
