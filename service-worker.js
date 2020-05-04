@@ -1,4 +1,4 @@
-const version = "v3";
+const version = "v4";
 const cacheName = `${version}-hellosharks`;
 
 self.addEventListener("install", e => {
