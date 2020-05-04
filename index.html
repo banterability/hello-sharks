@@ -3,8 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="description" content="A calculator for business valuations" />
+
     <title>Hello Sharks!</title>
+    <meta name="description" content="A calculator for business valuations" />
+
     <link rel="stylesheet" href="/style.css">
   </head>
   <body>
@@ -12,17 +14,25 @@
       <h1>Hello Sharks!</h1>
       <p>
         <span class="quot">&ldquo;</span>I'm seeking $<input
+          aria-label="amount"
           id="amount"
+          inputmode="numeric"
+          pattern="[0-9]*"
           value="50,000"
-          inputmode="numeric" pattern="[0-9]*" />
         />
-        for <input id="percent" value="20" inputmode="numeric" pattern="[0-9]*" /> percent of my
+        for <input
+          aria-label="percent"
+          id="percent"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          value="20"
+        /> percent of my
         company…<span class="quot">&rdquo;</span>
       </p>
       <hr />
       <p class="valuation">Valuation: <span id="value">$ 250,000</span></p>
     </div>
-    <script src="/script.js" type="text/javascript"></script>
+    <script async src="/script.js" type="text/javascript"></script>
 
     <script type="text/javascript">
       if ("serviceWorker" in navigator) {

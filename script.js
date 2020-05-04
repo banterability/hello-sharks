@@ -29,5 +29,9 @@ function asNumber(inputVal) {
   return parseInt(inputVal.replace(/,/g, "").replace(/\./g, ""), 10);
 }
 
-amountInput.addEventListener("input", handleInput, false);
-percentInput.addEventListener("input", handleInput, false);
+function init(){
+  amountInput.addEventListener("input", handleInput, false);
+  percentInput.addEventListener("input", handleInput, false);
+}
+
+init();
