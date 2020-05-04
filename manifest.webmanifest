@@ -1,0 +1,10 @@
+{
+  "short_name": "Hello Sharks!",
+  "name": "Hello Sharks!",
+  "description": "A calculator for business valuations",
+  "start_url": "/",
+  "background_color": "#69b3d0",
+  "display": "browser",
+  "scope": "/",
+  "theme_color": "#69b3d0"
+}
