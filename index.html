@@ -7,7 +7,68 @@
     <title>Hello Sharks!</title>
     <meta name="description" content="A calculator for business valuations" />
 
-    <link rel="stylesheet" href="/style.css">
+    <style media="screen">
+      html {
+        background: ##091f2a;
+        background-image: linear-gradient(351deg, #69b3d0 0%, #091f2a 100%);
+        height: 100%;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 3.4rem;
+      }
+
+      .form {
+        background-color: #ddd;
+        padding: 15px;
+        max-width: 490px;
+        margin: 1.5em auto;
+        text-align: center;
+        color: #333;
+      }
+
+      .form input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 3px dashed #999;
+        display: inline;
+        color: #111;
+        text-align: center;
+      }
+
+      #amount {
+        width: 180px;
+      }
+      #percent {
+        width: 90px;
+      }
+      #value {
+        color: #111;
+        font-weight: bold;
+      }
+      .quot {
+        font-size: 2.5rem;
+        color: #000;
+        font-family: Georgia;
+        padding: 0.3rem;
+      }
+
+      .form p,
+      .form input {
+        font-size: 2rem;
+        line-height: 3.2rem;
+      }
+
+      #amount,
+      #percent,
+      #value {
+        font-variant-numeric: tabular-nums;
+      }
+    </style>
   </head>
   <body>
     <div class="form">
@@ -20,14 +81,15 @@
           pattern="[0-9]*"
           value="50,000"
         />
-        for <input
+        for
+        <input
           aria-label="percent"
           id="percent"
           inputmode="numeric"
           pattern="[0-9]*"
           value="20"
-        /> percent of my
-        company…<span class="quot">&rdquo;</span>
+        />
+        percent of my company…<span class="quot">&rdquo;</span>
       </p>
       <hr />
       <p class="valuation">Valuation: <span id="value">$ 250,000</span></p>

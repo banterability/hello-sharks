@@ -1,11 +1,11 @@
-const version = "v5";
-const cacheName = `${version}-hellosharks`;
+const version = "v6::";
+const cacheName = `${version}assets`;
 
 self.addEventListener("install", e => {
   e.waitUntil(
     caches.open(cacheName).then(cache => {
       return cache
-        .addAll(["/", "/style.css", "/script.js"])
+        .addAll(["/", "/script.js"])
         .then(() => self.skipWaiting());
     })
   );
